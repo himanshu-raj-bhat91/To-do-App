@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #a5df199c;
+}
+
+h1 {
+    color: #fd0e62;
+    font-size: 45px;
+    font-weight: bolder;
+}
+
+ul li{
+    font-size: 22px;
+    font-weight: 700;
+    list-style: none;
+}
+#task-input {
+    width: 15%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.delete, button{
+    background-color: #fd0e62;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 140px;
+    height: 40px;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+</style>
+</head>
+<body>
+    <h1>To Do App</h1>
+    <input placeholder="enter your task" type="text" id="task-input">
+    <button>Add Task</button>
+    <ul>
+        <li>Eat <button class="delete">Delete</button></li>
+        <li>Run <button class="delete">Delete</button></li>
+    </ul>
+
+    <script>
+        let btn = document.querySelector("button");
+        let ul = document.querySelector("ul");
+        let inp = document.querySelector("input");
+
+        btn.addEventListener("click", function(){
+            let item = document.createElement("li");
+            item.innerText = inp.value;
+
+            let delBtn = document.createElement("button");
+            delBtn.innerText = "delete";
+            delBtn.classList.add("delete");
+
+
+            item.appendChild(delBtn);
+
+            ul.appendChild(item);
+            // console.log(inp.value);
+            inp.value = "";
+        });
+
+        /*let delBtns = document.querySelectorAll(".delete");
+        for(delBtn of delBtns){
+            delBtn.addEventListener("click", function(){
+                let par = this.parentElement;
+                console.log(par);
+                par.remove();
+            })
+        }*/
+
+        // Event Delegation
+        ul.addEventListener("click", function(event) {
+          if(event.target.nodeName == "BUTTON"){
+            let listItem = event.target.parentElement;
+            listItem.remove();
+            // console.log("deleted");
+          }
+        });
+        
+    </script>
+</body>
+</html>
